@@ -26,8 +26,8 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-       // document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('init', this.onDeviceReady, false);
+       document.addEventListener('deviceready', this.init, false);
+		//document.addEventListener('init', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
@@ -62,10 +62,10 @@ var app = {
 	}
 	
 	function successHandler(result) {
-    console.log('Success: '+ result);
+   alert('Success: '+ result);
 }
 function errorHandler(error) {
-    console.log('Error: '+ error);
+   alert('Error: '+ error);
 }
 function onNotificationGCM(e) {
     switch(e.event){
