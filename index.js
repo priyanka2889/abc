@@ -26,7 +26,8 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+       // document.addEventListener('deviceready', this.onDeviceReady, false);
+		document.addEventListener('init', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
@@ -46,6 +47,52 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+	function init()
+	{
+		 var pushNotification = window.plugins.pushNotification;
+		 pushNotification.register(
+		 successHandler, 
+		 errorHandler, 
+         {
+        'senderID':'820792837736',
+        'ecb':'onNotificationGCM' // callback function
+        }
+      );
+		
+	}
+	
+	function successHandler(result) {
+    console.log('Success: '+ result);
+}
+function errorHandler(error) {
+    console.log('Error: '+ error);
+}
+function onNotificationGCM(e) {
+    switch(e.event){
+        case 'registered':
+            if (e.regid.length > 0){
+                //deviceRegistered(e.regid);
+				alert(e.regid)
+            }
+        break;
+
+        case 'message':
+            if (e.foreground){
+            	// When the app is running foreground. 
+                alert('The room temperature is set too high')
+            }
+        break;
+
+        case 'error':
+            console.log('Error: ' + e.msg);
+        break;
+
+        default:
+         alert('An unknown event was received');
+          break;
+    }
+}
+
 };
 
 app.initialize();
