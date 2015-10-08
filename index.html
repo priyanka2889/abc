@@ -33,7 +33,7 @@ NOTE:
     }
    //begin setup
     function setupNotificationsForandroid() {
-     //  alert("inside setup");
+        alert("inside setup");
         if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
 
             pushNotification.register(
@@ -67,7 +67,7 @@ NOTE:
     // Android
 	window.onNotification = function(e){
    // function onNotification(e) {
-        //alert("inside onnotification");
+        alert("inside onnotification");
         switch( e.event )
         {
         case 'registered':
