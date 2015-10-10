@@ -10,13 +10,15 @@
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
         }
     </style>
-  <script type="text/javascript" charset="utf-8">       
+  <script type="text/javascript" charset="utf-8"> 
+var localPath ;  
     function init(){
         document.addEventListener("deviceready", ready, true);     
     }
     
     function ready() {
        alert("Thunderbirds are go!");
+	   localPath = cordova.file.externalRootDirectory;
     }
     
     function download1() {
@@ -28,7 +30,7 @@
             fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
                 var localPath = fileEntry.fullPath;
                 if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-                    localPath = localPath.substring(7);
+                    //localPath = localPath.substring(7);
 					  alert(localPath);
                 }
                 var ft = new FileTransfer();
