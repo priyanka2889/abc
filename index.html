@@ -96,7 +96,9 @@ see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-cu
 for more details -jm */
 function onDeviceReady()
 {
-store = cordova.file.externalRootDirectory;
+//store = cordova.file.externalRootDirectory;
+store = cordova.file.dataDirectory;
+
 alert(store);
 // do your thing!
         downloadFile();
