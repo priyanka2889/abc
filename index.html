@@ -10,52 +10,46 @@
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
         }
     </style>
-  <script type="text/javascript" charset="utf-8"> 
-document.addEventListener("deviceready", init, false);
-var store ;
-function init() {
-
-store = cordova.file.externalRootDirectory;
-alert(store);
-
-
-}
-
-
-function download1(){
- 
-alert("inside downloadResume");
-var fileTransfer = new FileTransfer();
-var uri = encodeURI("http://bluesys.in/dev/recruitmentbackend/gulpfile.js");
-var pathArray = uri.split( '/' );
-filename = pathArray[pathArray.length-1];
-var fileURL = store ;
-fileTransfer.download(
-    uri,
-	filePath,
-    fileURL+"/"+ filename,
-    function(entry) {
-       alert("download complete: " + entry.toURL());
-		//navigator.notification.confirm("Downloaded Successfully",null, "Alert", "Ok");
-									
-    },
-    function(error) {
-       //alert("download error source " + error.source);
-      //alert("download error target " + error.target);
-      // alert("upload error code" + error.code);
-	   alert(JSON.stringify(error));
-    },
-    false,
-    {
-        headers: {
-            "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-        }
+  <script type="text/javascript" charset="utf-8">     
+var store;  
+    function init(){
+        document.addEventListener("deviceready", ready, true);     
     }
-);
-
-
-}
     
+    function ready() {
+       alert("Thunderbirds are go!");
+	   store = cordova.file.externalRootDirectory;
+		alert(store);
+    }
+    
+    function download1() {
+        var remoteFile = "http://bluesys.in/dev/recruitmentbackend/gulpfile.js";
+        var localFileName = remoteFile.substring(remoteFile.lastIndexOf('/')+1);
+        alert(localFileName);
+		alert("downloading .....");
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+            fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+                var localPath = fileEntry.fullPath;
+                if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+                    localPath = localPath.substring(7);
+					  alert(localPath);
+                }
+                var ft = new FileTransfer();
+                ft.download(remoteFile,
+                    store, function(entry) {
+					alert("success");
+                        var dwnldImg = document.getElementById("dwnldImg");
+                        dwnldImg.src = entry.fullPath;
+                        dwnldImg.style.visibility = "visible";
+                        dwnldImg.style.display = "block";
+                    }, fail);
+            }, fail);
+        }, fail);
+    }
+    
+    function fail(error) {
+       alert(JSON.stringify(arg));
+    }
   </script>
 </head>
 
