@@ -5,7 +5,6 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Test Page</title>
 	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-        <script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>
     <style type="text/css">
         * {
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
@@ -24,6 +23,7 @@
         var remoteFile = "http://i3.kym-cdn.com/entries/icons/original/000/000/080/doubt.jpg";
         var localFileName = remoteFile.substring(remoteFile.lastIndexOf('/')+1);
         alert(localFileName);
+		alert("downloading .....");
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
             fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
                 var localPath = fileEntry.fullPath;
@@ -34,6 +34,7 @@
                 var ft = new FileTransfer();
                 ft.download(remoteFile,
                     localPath, function(entry) {
+					alert("success");
                         var dwnldImg = document.getElementById("dwnldImg");
                         dwnldImg.src = entry.fullPath;
                         dwnldImg.style.visibility = "visible";
