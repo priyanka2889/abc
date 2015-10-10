@@ -1,227 +1,55 @@
 <!DOCTYPE HTML>
-<!-- <html>
-    <head>
-        <title>com.PhoneGap.c2dm</title>
-		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-        <script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>
-        <script type="text/javascript" src="PushNotification.js"></script>
-    </head>
-    <body>
-
-/*
-NOTE:
-    This demo uses these plugins:
-        Cordova Device Plugin: http://plugins.cordova.io/#/package/org.apache.cordova.device
-        Cordova Media Plugin: http://plugins.cordova.io/#/package/org.apache.cordova.media
-
-    To add them via the CLI:
-        $ cordova plugin add org.apache.cordova.device
-        $ cordova plugin add org.apache.cordova.media
-*/       
-        <!--<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>-->
-       
-
-		
-        
-        <script type="text/javascript">
-        var pushNotification;
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-
-        pushNotification = window.plugins.pushNotification;
-        setupNotificationsForandroid();
-    }
-   //begin setup
-    function setupNotificationsForandroid() {
-        alert("inside setup");
-        //if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
-
-            pushNotification.register(
-            successHandler,
-            errorHandler,
-            {
-                "senderID":"820792837736",
-                "ecb":"onNotification"
-            });
-       /* } else {
-            pushNotification.register(
-            tokenHandler,
-            errorHandler,
-            {
-                "badge":"true",
-                "sound":"true",
-                "alert":"true",
-                "ecb":"onNotificationAPN"
-            });
-        }*/
-    }
-    function successHandler(result){
-
-        alert("success"+result);
-
-    }
-    function errorHandler(){
-
-        alert("error");
-    }
-    // Android
-	window.onNotification = function(e){
-   // function onNotification(e) {
-        alert("inside onnotification");
-        switch( e.event )
-        {
-        case 'registered':
-              if ( e.regid.length > 0 ){
-               //set up the server call for storing registraion ids
-                 alert(e.regid);
-              }
-
-        break;
-
-        case 'message':
-                // if this flag is set, this notification happened while we were in the foreground.
-            if(e.foreground){
-                var soundfile = e.soundname || e.payload.sound;
-                var my_media = new Media("android/assets/www/"+ soundfile);
-                my_media.play();
-            }else{
-               // otherwise we were launched because the user touched a notification in the notification tray.
-            }
-
-
-            break;
-
-        case 'error':
-             alert("Error"+e.msg);
-               break;
-
-        default:
-            alert("An unknown event");
-            return;
-      }
-    } 
-
-         </script>
-	<!--	<div id="home">
-			<div id="app-status-div">
-				<ul id="app-status-ul">
-					<li>Cordova PushNotification Plugin Demo</li>
-				</ul>
-			</div>
-			
-		</div>
-    </body>
-</html>  -->
-
-<!DOCTYPE html>
 <html>
-  <head>
-  <title></title>
- 
-<!-- Android
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-<meta charset="utf-8">-->
- 
-<!-- iPad/iPhone specific css below, add after your main css >
-<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="/ipad.css" type="text/css" />
-<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/iphone.css" type="text/css" />
--->
-<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script type="text/javascript">
- 
- 
-// If you want to prevent dragging, uncomment this section
-/*
-function preventBehavior(e) 
-{ 
-      e.preventDefault(); 
-    };
-document.addEventListener("touchmove", preventBehavior, false);
-*/
- 
-/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-for more details -jm */
-/*
-function handleOpenURL(url)
-{
-// TODO: do something with the url passed in.
-}
-*/
- 
-function onBodyLoad()
-{
-document.addEventListener("deviceready", onDeviceReady, false);
-}
- 
-    function downloadFile(){
-        window.requestFileSystem(
-                     LocalFileSystem.PERSISTENT, 0, 
-                     function onFileSystemSuccess(fileSystem) {
-                     fileSystem.root.getFile(
-                                 "dummy.html", {create: true, exclusive: false}, 
-                                 function gotFileEntry(fileEntry){
-                                 var sPath = fileEntry.fullPath.replace("dummy.html","");
-                                 var fileTransfer = new FileTransfer();
-                                 fileEntry.remove();
- 
-                                 fileTransfer.download(
-                                           "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
-                                           sPath + "theFile.pdf",
-                                           function(theFile) {
-                                           alert("download complete: " + theFile.toURI());
-                                           showLink(theFile.toURI());
-                                           },
-                                           function(error) {
-                                           alert("download error source " + error.source);
-                                           alert("download error target " + error.target);
-                                           alert("upload error code: " + error.code);
-                                           }
-                                           );
-                                 }, 
-                                 fail);
-                     }, 
-                     fail);
- 
+<head>
+    <meta name = "viewport" content = "user-scalable=no,width=device-width" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Test Page</title>
+	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>
+    <style type="text/css">
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+        }
+    </style>
+  <script type="text/javascript" charset="utf-8">       
+    function init(){
+        document.addEventListener("deviceready", ready, true);     
     }
- 
-    function showLink(url){
-        alert(url);
-        var divEl = document.getElementById("ready");
-        var aElem = document.createElement("a");
-        aElem.setAttribute("target", "_blank");
-        aElem.setAttribute("href", url);
-        aElem.appendChild(document.createTextNode("Ready! Click To Open."))
-        divEl.appendChild(aElem);
- 
+    
+    function ready() {
+       alert("Thunderbirds are go!");
     }
- 
- 
-    function fail(evt) {
-        alert(evt.target.error.code);
+    
+    function download() {
+        var remoteFile = "http://i3.kym-cdn.com/entries/icons/original/000/000/080/doubt.jpg";
+        var localFileName = remoteFile.substring(remoteFile.lastIndexOf('/')+1);
+        
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+            fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+                var localPath = fileEntry.fullPath;
+                if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+                    localPath = localPath.substring(7);
+                }
+                var ft = new FileTransfer();
+                ft.download(remoteFile,
+                    localPath, function(entry) {
+                        var dwnldImg = document.getElementById("dwnldImg");
+                        dwnldImg.src = entry.fullPath;
+                        dwnldImg.style.visibility = "visible";
+                        dwnldImg.style.display = "block";
+                    }, fail);
+            }, fail);
+        }, fail);
     }
- 
-/* When this function is called, PhoneGap has been initialized and is ready to roll */
-/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-for more details -jm */
-function onDeviceReady()
-{
-// do your thing!
-        downloadFile();
-}
- 
-    </script>
-  </head>
-  <body onload="onBodyLoad()">
-<h1>Hey, it's PhoneGap!</h1>
-<p>Don't know how to get started? Check out <em><a target="_blank" href="/http://www.phonegap.com/start">PhoneGap Start</a><em>
-</p>
-<br />
-    <p>
-        DOWNLOADING FILE...<br />
-        <span id="ready"></span>
-    </p>
-  </body>
+    
+    function fail(error) {
+       alert(error.code);
+    }
+  </script>
+</head>
+
+<body onload="init();">
+    <a href="#" onclick="download();">Download and display image</a>
+    <img src="" id="dwnldImg" style="display: none"/>
+</body>
 </html>
