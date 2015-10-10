@@ -15,7 +15,7 @@
 <!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript">
- 
+ var store;
  
 // If you want to prevent dragging, uncomment this section
 /*
@@ -42,6 +42,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 }
  
     function downloadFile(){
+	alert("store:"+store);
         window.requestFileSystem(
                      LocalFileSystem.PERSISTENT, 0, 
                      function onFileSystemSuccess(fileSystem) {
@@ -54,7 +55,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
  
                                  fileTransfer.download(
                                            "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
-                                           sPath + "theFile.pdf",
+                                            store+ "theFile.pdf",
                                            function(theFile) {
                                            alert("download complete: " + theFile.toURI());
                                            showLink(theFile.toURI());
@@ -95,6 +96,8 @@ see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-cu
 for more details -jm */
 function onDeviceReady()
 {
+store = cordova.file.externalRootDirectory;
+alert(store);
 // do your thing!
         downloadFile();
 }
