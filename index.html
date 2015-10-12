@@ -19,8 +19,7 @@
  		// Do cool things here...
         }
 	
-// window.getImage1 = function(e){
-      function getImage1() {
+  function getImage1() {
             // Retrieve image file location from specified source
             navigator.camera.getPicture(uploadPhoto, function(message) {
 			alert('get picture failed');
@@ -28,11 +27,11 @@
 			quality: 50, 
 			destinationType: navigator.camera.DestinationType.FILE_URI,
 			sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-			alert(destinationType+'get picture failed');
 		}
             );
  
         }
+ 
  
         function uploadPhoto(imageURI) {
             var options = new FileUploadOptions();
@@ -46,7 +45,7 @@
  
             options.params = params;
             options.chunkedMode = false;
- alert(JSON.stringify(options));
+			alert(JSON.stringify(options));
             var ft = new FileTransfer();
             ft.upload(imageURI, "http://bluesys.in/dev/recruitmentbackend/upload.php", win, fail, options);
         }
@@ -59,7 +58,7 @@
         }
  
         function fail(error) {
-            alert("An error has occurred: Code = " = error.code);
+            alert("An error has occurred: Code = " +error.code);
         }
  
         </script>
