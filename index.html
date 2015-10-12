@@ -55,6 +55,12 @@ fileChooser.open(function(uri) {
     function fail(evt) {
         alert(evt.target.error.code);
     }
+	function choose()
+	{
+	alert("inside choose");
+	fileChooser.open(successCallback, failureCallback);
+
+	}
 
     </script>
   </head>
