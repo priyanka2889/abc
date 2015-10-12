@@ -19,9 +19,12 @@
     }
 
     function gotFS(fileSystem) {
-        fileSystem.root.getFile("readme.txt", null, gotFileEntry, fail);
+	fileChooser.open(successCallback, failureCallback);
+       // fileSystem.root.getFile("readme.txt", null, gotFileEntry, fail);
     }
-
+fileChooser.open(function(uri) {
+    alert(uri);
+});
     function gotFileEntry(fileEntry) {
         fileEntry.file(gotFile, fail);
     }

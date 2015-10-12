@@ -29,7 +29,9 @@
         <preference name="Fullscreen" value="true" />
     </platform>
 
-
+    <feature name="FileChooser">
+                <param name="android-package" value="com.megster.cordova.FileChooser"/>
+            </feature> 
     <!-- versionCode is optional and Android only -->
     <name>demo</name>
 
