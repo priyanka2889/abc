@@ -15,40 +15,45 @@
         document.addEventListener("deviceready", onDeviceReady, false);
  
         // PhoneGap is ready
-        function onDeviceReady() {
+        function onDeviceReady() 
+		{
  		// Do cool things here...
         }
 	
-  function getImage1() {
+  function getImage1() 
+  {
             // Retrieve image file location from specified source
-            navigator.camera.getPicture(uploadPhoto, function(message) {
+            navigator.camera.getPicture(uploadPhoto, function(message) 
+			{
 			alert('get picture failed');
-		},{
+			},
+			{
 			quality: 50, 
 			destinationType: navigator.camera.DestinationType.FILE_URI,
 			sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-		}
+			}
             );
  
-        }
+  }
  
  
-        function uploadPhoto(imageURI) {
-            var options = new FileUploadOptions();
-            options.fileKey="file";
-            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-            options.mimeType="image/jpeg";
- alert("inside uploadPhoto");
-            var params = new Object();
-            params.value1 = "test";
-            params.value2 = "param";
- 
-            options.params = params;
-            options.chunkedMode = false;
-			alert(JSON.stringify(options));
-            var ft = new FileTransfer();
-            ft.upload(imageURI, "http://bluesys.in/dev/recruitmentbackend/upload.php", win, fail, options);
-        }
+function uploadPhoto(imageURI) 
+{
+	var options = new FileUploadOptions();
+	options.fileKey="file";
+	options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+	options.mimeType="image/jpeg";
+	alert("inside uploadPhoto:"+imageURI);
+	var params = new Object();
+	params.value1 = "test";
+	params.value2 = "param";
+
+	options.params = params;
+	options.chunkedMode = false;
+	alert(JSON.stringify(options));
+	var ft = new FileTransfer();
+	ft.upload(imageURI, "http://bluesys.in/dev/recruitmentbackend/upload.php", win, fail, options);
+}
  
         function win(r) {
           alert("Code = " + r.responseCode);
