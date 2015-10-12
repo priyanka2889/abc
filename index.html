@@ -1,70 +1,69 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
-    <title>FileReader Example</title>
+<head>
+    <title>File Transfer Example</title>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+</head>
+<body>
+<br/><br/>
+    <a href="" onclick="getImage1();">Upload a Photo</a>
+</body>
     <script type="text/javascript" charset="utf-8">
-
-    // Wait for PhoneGap to load
-    //
-    function onLoad() {
+ 
+        // Wait for PhoneGap to load
         document.addEventListener("deviceready", onDeviceReady, false);
-    }
+ 
+        // PhoneGap is ready
+        function onDeviceReady() 
+		{
+ 		// Do cool things here...
+        }
+	
+  function getImage1() 
+  {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(uploadPhoto, function(message) 
+			{
+			alert('get picture failed');
+			},
+			{
+			quality: 50, 
+			destinationType: navigator.camera.DestinationType.FILE_URI,
+			sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+			}
+            );
+ 
+  }
+ 
+ window.uploadPhoto = function(imageURI){
+///function uploadPhoto(imageURI){
+	var options = new FileUploadOptions();
+	options.fileKey="file";
+	options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+	options.mimeType="text/plain";
+	alert("inside uploadPhoto:"+imageURI);
+	var params = new Object();
+	params.value1 = "test";
+	params.value2 = "param";
 
-    // PhoneGap is ready
-    //
-    function onDeviceReady() {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-    }
-
-    function gotFS(fileSystem) {
-	fileChooser.open(successCallback, failureCallback);
-       // fileSystem.root.getFile("readme.txt", null, gotFileEntry, fail);
-    }
-fileChooser.open(function(uri) {
-    alert(uri);
-});
-    function gotFileEntry(fileEntry) {
-        fileEntry.file(gotFile, fail);
-    }
-
-    function gotFile(file){
-        readDataUrl(file);
-        readAsText(file);
-    }
-
-    function readDataUrl(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            alert("Read as data URL");
-            alert(evt.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function readAsText(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            alert("Read as text");
-            alert(evt.target.result);
-        };
-        reader.readAsText(file);
-    }
-
-    function fail(evt) {
-        alert(evt.target.error.code);
-    }
-	function choose()
-	{
-	alert("inside choose");
-	fileChooser.open(successCallback, failureCallback);
-
-	}
-
-    </script>
-  </head>
-  <body>
-<button onclick="choose();">click me</button>
-  </body>
+	options.params = params;
+	options.chunkedMode = false;
+	alert(JSON.stringify(options));
+	var ft = new FileTransfer();
+	ft.upload(imageURI, "http://bluesys.in/dev/recruitmentbackend/upload.php", win, fail, options);
+}
+ 
+        function win(r) {
+          alert("Code = " + r.responseCode);
+          alert("Response = " + r.response);
+          alert("Sent = " + r.bytesSent);
+            alert(r.response);
+        }
+ 
+        function fail(error) {
+            alert("An error has occurred: Code = " +error.code);
+        }
+ 
+        </script>
 </html>
