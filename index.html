@@ -47,7 +47,9 @@ alert("in device ready");
         }
 
         function fail(error) {
-          alert(JSON.stringify(error));
+            alert("An error has occurred: Code = " + error.code);
+            alert("upload error source " + error.source);
+            alert("upload error target " + error.target);
         }
 
         </script>
